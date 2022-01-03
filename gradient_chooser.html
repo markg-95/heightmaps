@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="style.css">
+	<script src="main.js"></script>
+	<script src="gradient_chooser.js"></script>
+	<script src="perlin.js"></script>
+	<script src="draw.js"></script>
+	<script src="erode.js"></script>
+  </head>
+  <body>
+  <div id="wrapper">
+	<div id="options_wrapper">
+		<form>
+		<!--
+			<label>Canvas Padding: </label>
+			<input type="range" id="padding_slider" onchange=set_padding()></input>
+			<input id="luw_input" onchange=update_values("input")>#</input>
+			<br> -->
+			<h2>(Perlin) Noise Parameters</h2>
+			<label>Lattice Width (in cells): </label>
+			<input type="range" id="lw_slider" onchange=update_values("slider")></input> 
+			<input id="lw_input" onchange=update_values("input")></input>
+			<br>
+			<label>Lattice Unit Width (in pixels): </label>
+			<input type="range" id="luw_slider" onchange=update_values("slider")></input>
+			<input id="luw_input" onchange=update_values("input")></input>
+			<br>
+			<label>Image Width (in pixels): </label>
+			<label id="width"></label>
+			<br>
+			<label>Seed: </label>
+			<input type="input" id="seed_input" onchange=update_values("input")></input> 
+			<br>
+			<label>Octaves: </label>
+			<input type="radio" id="1octaves" name="octaves_radio" onclick=update_values("radio") value="1">
+			<label for="1octaves">1</label>
+			<input type="radio" id="2octaves" name="octaves_radio" onclick=update_values("radio") value="2">
+			<label for="2octaves">2</label>
+			<input type="radio" id="3octaves" name="octaves_radio" onclick=update_values("radio") value="3">
+			<label for="3octaves">3</label>
+			<input type="radio" id="4octaves" name="octaves_radio" onclick=update_values("radio") value="4">
+			<label for="4octaves">4</label>
+			<br>
+			<!-- <button type="button" onclick=field_manipulate()>Focus</button> -->
+			<button type="button" onclick=perlin_driver()>Generate Noise</button>
+			<button type="button" id="show_hide_Grid" onclick=show_hide("Grid")>Hide Grid</button>
+			<button type="button" id="show_hide_Vectors" onclick=show_hide("Vectors")>Hide Vectors</button>
+			<button type="button" id="show_hide_Image" onclick=show_hide("Image")>Show Image</button>
+			<button type="button" id="show_hide_Final" onclick=show_hide("Final")>Show Final</button>
+			<button type="button" id="clear_data" onclick=reset_image()>Clear</button>
+			<button type="button" id="randomize" onclick=do_randomize()>Random</button>
+			<h2>Erosion Parameters</h2>
+			<label>Inertia: </label>
+			<input type="range" id="inertia_slider" onchange=update_values("slider")></input> 
+			<input id="inertia_input" onchange=update_values("input")></input>
+			<br>
+			<label>Carry Capacity: </label>
+			<input type="range" id="carry_slider" onchange=update_values("slider")></input> 
+			<input id="carry_input" onchange=update_values("input")></input>
+			<br>
+			<label>Deposition Speed: </label>
+			<input type="range" id="deposition_slider" onchange=update_values("slider")></input> 
+			<input id="deposition_input" onchange=update_values("input")></input>
+			<br>
+			<label>Erosion Speed: </label>
+			<input type="range" id="erosion_slider" onchange=update_values("slider")></input> 
+			<input id="erosion_input" onchange=update_values("input")></input>
+			<br>
+			<label>Evaporation Speed: </label>
+			<input type="range" id="evaporation_slider" onchange=update_values("slider")></input> 
+			<input id="evaporation_input" onchange=update_values("input")></input>
+			<br>
+			<label>Erosion Radius: </label>
+			<input type="range" id="radius_slider" onchange=update_values("slider")></input> 
+			<input id="radius_input" onchange=update_values("input")></input>
+			<br>
+			<label>Minimum Slope: </label>
+			<input type="range" id="slope_slider" onchange=update_values("slider")></input> 
+			<input id="slope_input" onchange=update_values("input")></input>
+			<br>
+			<label>Iterations: </label>
+			<input type="range" id="iterations_slider" onchange=update_values("slider")></input> 
+			<input id="iterations_input" onchange=update_values("input")></input>
+			<br>
+			<button type="button" id="erode" onclick=erosion_driver()>Erode</button>
+		</form>
+		
+		
+	</div>
+	<canvas id="my_canvas"></canvas>
+	<canvas id="final_canvas"></canvas>
+	<textarea id="io_gradients" readonly=true></textarea>
+	
+  </div>
+	
+  </body>
+</html>
