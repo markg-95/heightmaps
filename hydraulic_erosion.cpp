@@ -17,7 +17,7 @@ using namespace std::chrono; // nanoseconds, system_clock, seconds
 
 
 
-vector<vector<float>> erode (vector<vector<float>> heightmapsrc, float weights[], bool debug, float  inertia=.1,float carry_capacity=1,float deposition_speed=1,float erosion_speed=.9,float evaporation_speed=.001, float erosion_radius=3, float min_slope=.1, float max_lifetime=50, float gravity=1){
+vector<vector<float>> erode (vector<vector<float>> heightmapsrc, float weights[], bool debug, float  inertia=.1,float carry_capacity=1,float deposition_speed=1,float erosion_speed=.9,float evaporation_speed=.01, float erosion_radius=3, float min_slope=.1, float max_lifetime=50, float gravity=1){
 	vector<vector<float>> heightmap = heightmapsrc;
 	
 	int map_h = heightmap.size();
@@ -51,10 +51,10 @@ vector<vector<float>> erode (vector<vector<float>> heightmapsrc, float weights[]
 		
 		
 		// if droplet moves out of bounds, exit;
-		if(cell_x >= map_w-1){
+		if(cell_x >= map_w-2){
 			break;
 		}
-		if(cell_y >= map_h-1){
+		if(cell_y >= map_h-2){
 			break;
 		}
 		if(cell_x < 0){
@@ -212,7 +212,12 @@ int driver(bool debug){
 	cout << "Enter path to .txt file.\n";
 	cin >> src_path;
 	
-	vector<vector<float>> image = load_image_as_vector_from_csv_path(src_path,946,946);
+	vector<int> dims = get_csv_dims(src_path);
+	
+	vector<vector<float>> image = load_image_as_vector_from_csv_path(src_path,dims[0],dims[1]);
+	
+	
+	// debug_vector_to_console(image);
 	
 	// generate list of weights
 	int erosion_radius = 3;
@@ -233,7 +238,7 @@ int driver(bool debug){
 	for(int i=0;i<n;i++){
 		for(int j=0;j<n;j++){
 			weights[counter]=const_distances[counter]/running_sum;
-			printf("Weight at %d , %d is %f.\n", i, j, weights[counter]);
+			// printf("Weight at %d , %d is %f.\n", i, j, weights[counter]);
 			counter++;
 		}	
 	}
